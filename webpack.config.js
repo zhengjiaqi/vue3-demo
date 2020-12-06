@@ -12,6 +12,7 @@ module.exports = (env = {}) => ({
     path: path.resolve(__dirname, './dist'),
   },
   resolve: {
+    extensions: ['.js', '.vue', '.json', '.ts'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
     }
@@ -38,6 +39,14 @@ module.exports = (env = {}) => ({
           },
           'css-loader'
         ]
+      },
+      {    
+        test: /\.tsx?$/,    
+        loader: 'ts-loader',    
+        exclude: /node_modules/,    
+        options: {
+          appendTsSuffixTo: [/\.vue$/],    
+        }    
       }
     ]
   },
@@ -59,6 +68,9 @@ module.exports = (env = {}) => ({
     inline: true,
     hot: true,
     stats: 'minimal',
-    overlay: true
+    // contentBase: __dirname,
+    // overlay: true
+    historyApiFallback: true,
+    noInfo: false
   }
 })
